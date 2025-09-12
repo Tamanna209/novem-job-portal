@@ -19,7 +19,11 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url:[ "https://job-portal-by-novem.onrender.com/", "http://localhost:8080"],
+      url: "https://job-portal-by-novem.onrender.com/",
+      description: 'Production server',
+    },
+    {
+      url: "http://localhost:8080",
       description: 'Development server',
     },
   ],
