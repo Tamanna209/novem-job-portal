@@ -1,11 +1,11 @@
-const express = require('express');
-const { socialLoginRegister } = require('../controllers/users.controller');
+const express = require("express");
+const { socialLoginRegister } = require("../controllers/users.controller");
 
 const router = express.Router();
 
 /**
  * @swagger
- * /api/user-social-login-register:
+ * /api/user/social-login-register:
  *   post:
  *     summary: User Social Login/Register
  *     description: Enables login/registration via social media accounts. If the user is new, registers them; otherwise, logs them in.
@@ -79,6 +79,6 @@ const router = express.Router();
  *                           type: string
  *                           example: "2024-08-29 22:31:38"
  */
-router.post('/user-social-login-register', socialLoginRegister);
+router.post("/social-login-register", socialLoginRegister);
 
 module.exports = router;
