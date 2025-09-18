@@ -9,6 +9,8 @@ const userSchema = new mongoose.Schema({
   user_type: String,
   location: String,
   app_id: String,
+  number: String,
+  otp: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });

@@ -9,6 +9,8 @@ const userRoutes = require('./routes/users.route');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
+
+
 // Swagger definition
 const swaggerDefinition = {
   openapi: '3.0.0',
@@ -36,6 +38,10 @@ const options = {
 
 const swaggerSpec = swaggerJSDoc(options);
 
+
+
+
+
 //middleware
 app.use(cors(
     {
@@ -47,6 +53,7 @@ app.use(cors(
 app.use(express.json());
 
 app.use('/api/user/', userRoutes);
+
 
 // Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));

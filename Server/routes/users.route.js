@@ -1,5 +1,5 @@
 const express = require("express");
-const { socialLoginRegister } = require("../controllers/users.controller");
+const { socialLoginRegister, userNumberLoginRegister, userOtpVerify } = require("../controllers/users.controller");
 
 const router = express.Router();
 
@@ -80,5 +80,101 @@ const router = express.Router();
  *                           example: "2024-08-29 22:31:38"
  */
 router.post("/social-login-register", socialLoginRegister);
+
+/**
+ * @swagger
+ * /api/user/user-number-login-register:
+ *   post:
+ *     summary: User Number Login/Register
+ *     description: Enables login/registration via mobile number. Generates OTP for verification.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               number:
+ *                 type: string
+ *                 description: User Phone Number
+ *               reg_id:
+ *                 type: string
+ *                 description: Registration ID (FCM token for push notifications)
+ *               device_id:
+ *                 type: string
+ *                 description: Unique device identifier
+ *               location:
+ *                 type: string
+ *                 description: User current location
+ *               user_type:
+ *                 type: string
+ *                 description: User login type (user/employer)
+ *     responses:
+ *       200:
+ *         description: User logged in successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "1"
+ *                 message:
+ *                   type: string
+ *                   example: "User logged in successfully"
+ *                 otp:
+ *                   type: string
+ *                   example: "12345"
+ */
+router.post("/user-number-login-register", userNumberLoginRegister);
+
+/**
+ * @swagger
+ * /api/user/user-otp-verify:
+ *   post:
+ *     summary: User OTP Verification
+ *     description: Verifies OTP for user login/register authentication.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               number:
+ *                 type: string
+ *                 description: User Phone Number
+ *               otp:
+ *                 type: string
+ *                 description: OTP received for verification
+ *     responses:
+ *       200:
+ *         description: User logged in successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "success"
+ *                 message:
+ *                   type: string
+ *                   example: "User logged in successfully"
+ *                 app_id:
+ *                   type: string
+ *                   example: "550e8400-e29b-41d4-a716-446655440000"
+ *                 user_type:
+ *                   type: string
+ *                   example: "user/employer"
+ *                 is_new_user:
+ *                   type: boolean
+ *                   example: false
+ *                 auth_token:
+ *                   type: string
+ *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ */
+router.post("/user-otp-verify", userOtpVerify);
 
 module.exports = router;
