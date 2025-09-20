@@ -104,8 +104,8 @@ const userNumberLoginRegister = async (req, res) => {
       user.updatedAt = new Date();
     }
 
-    // Generate 5-digit OTP
-    const otp = Math.floor(10000 + Math.random() * 90000).toString();
+    // Generate 4-digit OTP
+    const otp = Math.floor(1000 + Math.random() * 9000).toString();
     user.otp = otp;
 
     await user.save();
